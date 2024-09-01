@@ -1,0 +1,28 @@
+uuid: b246c763-7de4-4de5-be6d-21a4dc797833
+langcode: fr
+status: true
+dependencies:
+  module:
+    - adimeo_test
+    - node
+  theme:
+    - test_drupal
+id: relatedevents
+theme: test_drupal
+region: content
+weight: 0
+provider: null
+plugin: related_events_block
+settings:
+  id: related_events_block
+  label: 'Related Events'
+  label_display: visible
+  provider: adimeo_test
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      event: event

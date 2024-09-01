@@ -1,0 +1,22 @@
+<?php
+
+
+/**
+ * Implements hook_cron().
+ */
+function adimeo_test_cron() {
+  $queue = \Drupal::queue('event_unpublish_queue_worker');
+  $current_date = date('Y-m-d\TH:i:s');
+
+  $query = \Drupal::entityQuery('node')
+    ->condition('type', 'event')
+    ->condition('field_date_range.end_value', $current_date, '<')
+    ->condition('status', 1)
+    ->range(0, 50) // Limite à 50 nœuds à la fois.
+    ->accessCheck(TRUE);
+
+  $nids = $query->execute();
+  foreach ($nids as $nid) {
+    $queue->createItem(['nid' => $nid]);
+  }
+}

@@ -1,0 +1,8 @@
+name: 'Adimeo Custom Event Block'
+type: module
+description: 'Provides a block that displays related events.'
+core_version_requirement: ^10
+package: Custom
+dependencies:
+  - drupal:node
+  - drupal:taxonomy
